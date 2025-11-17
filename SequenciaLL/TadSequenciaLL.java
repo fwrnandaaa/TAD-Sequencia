@@ -73,5 +73,25 @@ public class TadSequenciaLL {
     }
     return O.next.value;
   }
-
+  public Object elemAtRank(int r){
+    if(isEmpty()){
+      throw new SequenciaLLExcecao("A sequencia vazia.");
+    }
+    if(r <= (size/2)){
+      Node current = head.next;
+      for(int i=0; i<=r; i++){
+        current = current.next;
+      }
+      return current.value;
+    }
+    else{
+      Node current = tail.prev;
+      for(int i = size-1; i>=0;i--){
+        current = current.prev;
+      }
+      return current.value;
+      
+    }
+    
+  }
 }

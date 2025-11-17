@@ -12,5 +12,6 @@ public class SequenciaTesteLL{
         v.verSequenciaLL();
         System.out.println("sei la: "+ v.before(aux2));
         System.out.println("sei la: "+ v.after(aux4));
+        System.out.println("Elemento no rank 2: "+ v.elemAtRank(1));
     }
 }
