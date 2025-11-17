@@ -13,7 +13,6 @@ public class TadSequenciaLL {
             this.value = value;
             this.prev = null;
             this.next = null;
-            this.rank = 0;
            
         }
     }
@@ -74,4 +73,5 @@ public class TadSequenciaLL {
     }
     return O.next.value;
   }
+
 }
