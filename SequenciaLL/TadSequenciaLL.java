@@ -79,19 +79,158 @@ public class TadSequenciaLL {
     }
     if(r <= (size/2)){
       Node current = head.next;
-      for(int i=0; i<=r; i++){
+      for(int i=0; i<r; i++){
         current = current.next;
       }
       return current.value;
     }
     else{
       Node current = tail.prev;
-      for(int i = size-1; i>=0;i--){
+      for(int i = size-1; i>=r;i--){
         current = current.prev;
       }
       return current.value;
       
     }
     
+  }
+  public void replaceAtRank(int r, Node O){
+    if(r<0 || r>=size){
+      throw new SequenciaLLExcecao("O rank não pode ser menor que 0 ou menor que o tamanho da sequencia.");
+    }
+    if(r==0){
+      head.next.value = O;
+      return;
+    }
+    if(r <= (size/2)){
+      Node current = head.next;
+      for(int i = 0; i<r; i++){
+        current= current.next;
+      }
+      current.value=O.value;
+    }
+    else{
+      Node current = tail.prev;
+      for(int i = size-1; i>r; i++){
+        current=current.next;
+      }
+      current.value=O.value;
+    }
+  }
+  public void insertAtRank(int r, Node O){
+    if(r<0 || r>=size){
+      throw new SequenciaLLExcecao("O rank não pode ser menor que 0 ou maior que o tamanho da sequencia.");
+    }
+    Node current = head.next;
+    if(r == 0){
+      O.next = head.next;
+      O.prev = head;
+      head.next.prev = O;
+      head.next = O;
+      size++;
+      return;
+    }
+    if(r <= (size/2)){
+
+      for(int i=1; i<size; i++){
+        current = current.next;
+      }
+    }
+    else{
+      current = tail.prev;
+      for(int i=size-1; i>r-1; i--){
+        current = current.prev;
+      }
+    }
+    O.next = current;
+    O.prev = current.prev;
+    current.prev.next = O;
+    current.prev = O;
+    size++;
+  }
+  public Object removeAtRank(int r){
+    if(head.next == null){
+      throw new SequenciaLLExcecao("A sequencia está vazia");
+    }
+    Node current = head.next;
+    if(r == 0){
+      head.next = tail;
+      tail.prev = head;
+      size--;
+      return current.value;
+    }
+    
+    if(r <= (size/2)){
+      for(int i=0; i<r; i++){
+        current = current.next;
+      }
+    }
+    else{
+      current = tail.prev;
+      for(int i=size-1; i>r; i--){
+        current = current.prev;
+      }
+    }
+    current.prev.next = current.next;
+    current.next.prev = current.prev;
+    size--;
+    return current.value;
+  }
+  public Object atRank(int r){
+    if(head.next == null){
+      throw new SequenciaLLExcecao("A sequencia está vazia.");
+    }
+    Node current = head.next;
+    if(r == 0){
+      head.next = tail;
+      tail.prev = head;
+      size--;
+      return current.value;
+    }
+    
+    if(r <= (size/2)){
+      for(int i=0; i<r; i++){
+        current = current.next;
+      }
+    }
+    else{
+      current = tail.prev;
+      for(int i=size-1; i>r; i--){
+        current = current.prev;
+      }
+    }
+    return current.value;
+  }
+  public int rankOf(Node O){
+    if(head.next == null){
+      throw new SequenciaLLExcecao("A sequencia está vazia.");
+    }
+    Node current = head.next;
+    for(int i =0; i<size; i++){
+      if(current.value == O.value){
+        return i;
+      }
+      current = current.next;
+    }
+      throw new SequenciaLLExcecao("O nó informado não está na lista");
+  }
+  public void insertLast(Node O){
+    O.prev = tail.prev;
+    O.next = tail;
+    tail.prev.next = O;
+    tail.prev = O;
+    size++;
+
+  }
+  public void replaceElement(Node N, Node O){
+    if(head.next == null){
+      throw new SequenciaLLExcecao("A sequencia está vazia.");
+    }
+    N.value = O.value;
+  }
+  public void swapElements(Node N, Node O){
+    Node current = new Node(N.value);
+    N.value = O.value;
+    O.value = current.value;
   }
 }
