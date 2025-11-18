@@ -86,7 +86,7 @@ public class TadSequenciaLL {
     }
     else{
       Node current = tail.prev;
-      for(int i = size-1; i>=r;i--){
+      for(int i = size-1; i>r;i--){
         current = current.prev;
       }
       return current.value;
@@ -99,7 +99,7 @@ public class TadSequenciaLL {
       throw new SequenciaLLExcecao("O rank não pode ser menor que 0 ou menor que o tamanho da sequencia.");
     }
     if(r==0){
-      head.next.value = O;
+      head.next.value = O.value;
       return;
     }
     if(r <= (size/2)){
@@ -112,13 +112,13 @@ public class TadSequenciaLL {
     else{
       Node current = tail.prev;
       for(int i = size-1; i>r; i++){
-        current=current.next;
+        current=current.prev;
       }
       current.value=O.value;
     }
   }
   public void insertAtRank(int r, Node O){
-    if(r<0 || r>=size){
+    if(r<0 || r>size){
       throw new SequenciaLLExcecao("O rank não pode ser menor que 0 ou maior que o tamanho da sequencia.");
     }
     Node current = head.next;
@@ -132,7 +132,7 @@ public class TadSequenciaLL {
     }
     if(r <= (size/2)){
 
-      for(int i=1; i<size; i++){
+      for(int i=0; i<r; i++){
         current = current.next;
       }
     }
@@ -149,13 +149,13 @@ public class TadSequenciaLL {
     size++;
   }
   public Object removeAtRank(int r){
-    if(head.next == null){
+    if(head.next == tail){
       throw new SequenciaLLExcecao("A sequencia está vazia");
     }
     Node current = head.next;
     if(r == 0){
-      head.next = tail;
-      tail.prev = head;
+      head.next = current.next;
+      current.next.prev = head;
       size--;
       return current.value;
     }
@@ -182,9 +182,6 @@ public class TadSequenciaLL {
     }
     Node current = head.next;
     if(r == 0){
-      head.next = tail;
-      tail.prev = head;
-      size--;
       return current.value;
     }
     
@@ -232,5 +229,26 @@ public class TadSequenciaLL {
     Node current = new Node(N.value);
     N.value = O.value;
     O.value = current.value;
+  }
+  public void insertBefore(Node N, Node O){
+    O.prev = N.prev;
+    O.next = N;
+    N.prev.next = O;
+    N.prev = O;
+    size++;
+  }
+  public void insertAfter(Node N, Node O){
+    O.next = N.next;
+    O.prev = N;
+    N.next.prev = O;
+    N.next = O;
+    size++;
+
+  }
+  public Object remove(Node O){
+    O.prev.next = O.next;
+    O.next.prev = O.prev;
+    size--;
+    return O.value;
   }
 }

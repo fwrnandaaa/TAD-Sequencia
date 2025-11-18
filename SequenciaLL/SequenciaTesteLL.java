@@ -9,6 +9,8 @@ public class SequenciaTesteLL{
         TadSequenciaLL.Node aux6 = new TadSequenciaLL.Node(13);
         TadSequenciaLL.Node aux7 = new TadSequenciaLL.Node(12);
         TadSequenciaLL.Node aux8 = new TadSequenciaLL.Node(10);
+        TadSequenciaLL.Node aux9 = new TadSequenciaLL.Node(11);
+        TadSequenciaLL.Node aux10 = new TadSequenciaLL.Node(9);
         v.insertFirst(aux1);
         v.insertFirst(aux2);
         v.insertFirst(aux3);
@@ -36,6 +38,14 @@ public class SequenciaTesteLL{
         v.verSequenciaLL();
         System.out.println("------------ swap element ------------");
         v.swapElements(aux7, aux3);
+        v.verSequenciaLL();
+        System.out.println("------------ insert before ------------");
+        v.insertBefore(aux7, aux9);
+        v.verSequenciaLL();
+        System.out.println("------------ insert after ------------");
+        v.insertAfter(aux9, aux10);
+        v.verSequenciaLL();
+        System.out.println("remove: "+ v.remove(aux10));
         v.verSequenciaLL();
     }
 }
