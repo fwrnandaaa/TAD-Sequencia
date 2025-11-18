@@ -177,7 +177,7 @@ public class TadSequenciaLL {
     return current.value;
   }
   public Object atRank(int r){
-    if(head.next == null){
+    if(head.next == tail){
       throw new SequenciaLLExcecao("A sequencia está vazia.");
     }
     Node current = head.next;
@@ -199,7 +199,7 @@ public class TadSequenciaLL {
     return current.value;
   }
   public int rankOf(Node O){
-    if(head.next == null){
+    if(head.next == tail){
       throw new SequenciaLLExcecao("A sequencia está vazia.");
     }
     Node current = head.next;
@@ -220,7 +220,7 @@ public class TadSequenciaLL {
 
   }
   public void replaceElement(Node N, Node O){
-    if(head.next == null){
+    if(head.next == tail){
       throw new SequenciaLLExcecao("A sequencia está vazia.");
     }
     N.value = O.value;
